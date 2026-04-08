@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "name": "logic-leak-void",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/tokenomics",
+      "destination": "/index.html#tokenomics"
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/index.html#roadmap"
+    }
+  ]
+}
