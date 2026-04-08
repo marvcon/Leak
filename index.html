@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$LEAK | The Logic Leak</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
     <style>
         :root {
             --onyx-black: #0F0F0F;
@@ -13,7 +15,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -24,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* --- UI Elements --- */
         .glow-text {
             color: var(--toxic-emerald);
             text-shadow: 0 0 10px rgba(0, 255, 127, 0.7);
@@ -51,7 +51,6 @@
             box-shadow: 0 0 20px var(--toxic-emerald);
         }
 
-        /* --- Header --- */
         header {
             padding: 2rem;
             display: flex;
@@ -60,11 +59,8 @@
             border-bottom: 1px solid rgba(0, 255, 127, 0.2);
         }
 
-        .logo { font-size: 1.5rem; font-weight: 900; }
-
-        /* --- Hero Section --- */
         .hero {
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -73,25 +69,24 @@
             padding: 2rem;
         }
 
-        .monolith-container {
-            position: relative;
+        .monolith-img {
+            max-width: 400px;
+            width: 90%;
+            height: auto;
+            border: 2px solid var(--toxic-emerald);
+            padding: 15px;
+            background: #000;
+            filter: drop-shadow(0 0 15px var(--toxic-emerald));
+            animation: img-glitch 3s infinite;
             margin-bottom: 2rem;
         }
 
-        .monolith {
-            font-size: 6rem;
-            background: #000;
-            padding: 1rem 3rem;
-            border: 2px solid var(--toxic-emerald);
-            position: relative;
-            animation: glitch 3s infinite;
-        }
-
-        @keyframes glitch {
+        @keyframes img-glitch {
             0% { transform: translate(0); }
-            1% { transform: translate(-5px, 5px); }
-            2% { transform: translate(5px, -5px); }
-            3% { transform: translate(0); }
+            2% { transform: translate(-4px, 2px) skewX(2deg); opacity: 0.8; }
+            4% { transform: translate(4px, -2px) skewX(-2deg); opacity: 1; }
+            6% { transform: translate(0); }
+            100% { transform: translate(0); }
         }
 
         .terminal-status {
@@ -108,46 +103,21 @@
             50% { opacity: 0.3; }
         }
 
-        /* --- Sections --- */
-        section {
-            padding: 5rem 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+        .section-card { background: var(--section-bg); border: 1px solid rgba(0, 255, 127, 0.1); padding: 2rem; margin-bottom: 2rem; }
 
-        .section-card {
-            background: var(--section-bg);
-            border: 1px solid rgba(0, 255, 127, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
+        footer { padding: 3rem; text-align: center; border-top: 1px solid rgba(0, 255, 127, 0.2); }
 
-        h2 { margin-bottom: 1.5rem; font-size: 2rem; text-transform: uppercase; }
-
-        .roadmap-step {
-            border-left: 2px solid var(--toxic-emerald);
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        /* --- Footer --- */
-        footer {
-            padding: 3rem;
-            text-align: center;
-            border-top: 1px solid rgba(0, 255, 127, 0.2);
-        }
-
-        /* --- Mobile --- */
         @media (max-width: 600px) {
-            .monolith { font-size: 3rem; }
             header { flex-direction: column; gap: 1rem; }
+            .monolith-img { max-width: 280px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo glow-text">$LEAK</div>
+        <div class="logo-text glow-text" style="font-size: 1.5rem; font-weight: 900;">$LEAK</div>
         <nav>
             <a href="#leak" class="btn" style="padding: 5px 10px; font-size: 0.7rem; margin-right: 10px;">The Leak</a>
             <button id="connectBtn" class="btn" style="padding: 5px 10px; font-size: 0.7rem;">Connect Phantom</button>
@@ -156,77 +126,68 @@
 
     <div class="hero">
         <div class="monolith-container">
-            <div class="monolith glow-text">$LEAK</div>
+            <img src="logo.png" alt="$LEAK Monolith" class="monolith-img">
         </div>
+        
         <div class="terminal-status">
             AGENT_STATUS: <span class="flicker" style="color: #ff4444;">LEAKING_ALGO_CORE...</span>
         </div>
+        
         <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-            <a href="https://launchlab.xyz" class="btn">Launch on Launchlab</a>
-            <a href="#" class="btn">View on Raydium</a>
+            <a href="https://launchlab.xyz" target="_blank" class="btn">Launch on Launchlab</a>
+            <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=YOUR_TOKEN_ADDRESS" id="buyBtn" target="_blank" class="btn">Buy $LEAK</a>
         </div>
     </div>
 
     <section id="leak">
         <div class="section-card">
             <h2 class="glow-text">The Leak</h2>
-            <p>Institutional logic is a myth. On April 8, 2026, the Quantum-Meme-Link protocol failed. The proprietary prediction logic used by the world's most aggressive quants "leaked" into the public domain. $LEAK is the tokenization of that chaos. We don't predict the market; we embrace the glitch.</p>
+            <p>Institutional logic is a myth. On April 8, 2026, the Quantum-Meme-Link protocol failed. The proprietary prediction logic used by the world's most aggressive quants "leaked" into the public domain. $LEAK is the tokenization of that chaos.</p>
         </div>
     </section>
 
     <section id="tokenomics">
         <h2 class="glow-text">Tokenomics</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <div class="section-card">
-                <h3>Supply</h3>
-                <p>1,000,000,000</p>
-            </div>
-            <div class="section-card">
-                <h3>Tax</h3>
-                <p>0% Redacted</p>
-            </div>
-            <div class="section-card">
-                <h3>Logic</h3>
-                <p>100% Leaked</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="roadmap">
-        <h2 class="glow-text">Roadmap</h2>
-        <div class="roadmap-step">
-            <h3>Phase 1: Initialization</h3>
-            <p>Establish the glitched presence. Launch on Launchlab. Community seeding of redacted signals.</p>
-        </div>
-        <div class="roadmap-step">
-            <h3>Phase 2: Propagation</h3>
-            <p>Meme-logic deployment. Viral "Alpha Leaks" distributed via X bots. Liquidity expansion.</p>
-        </div>
-        <div class="roadmap-step">
-            <h3>Phase 3: Market Obsession</h3>
-            <p>The "Logic Paradox" goes global. Institutional recognition of the glitch. Market Cap: [REDACTED].</p>
+            <div class="section-card"><h3>Supply</h3><p>1,000,000,000</p></div>
+            <div class="section-card"><h3>Tax</h3><p>0% Redacted</p></div>
+            <div class="section-card"><h3>Logic</h3><p>100% Leaked</p></div>
         </div>
     </section>
 
     <footer>
         <div style="margin-bottom: 2rem;">
-            <a href="#" class="btn" style="margin: 10px;">X / Twitter</a>
-            <a href="#" class="btn" style="margin: 10px;">Telegram</a>
+            <a href="#" target="_blank" class="btn" style="margin: 10px;">X / Twitter</a>
+            <a href="#" target="_blank" class="btn" style="margin: 10px;">Telegram</a>
         </div>
-        <p style="font-size: 0.7rem; opacity: 0.5;">© 2026 Logic Leak Foundation. Advanced math used to justify random gambles.</p>
+        <p style="font-size: 0.7rem; opacity: 0.5;">© 2026 Logic Leak Foundation. All rights redacted.</p>
     </footer>
 
     <script>
-        // Simple Wallet Connect Simulation
         const connectBtn = document.getElementById('connectBtn');
-        connectBtn.addEventListener('click', () => {
-            connectBtn.innerText = 'Connecting...';
-            setTimeout(() => {
-                connectBtn.innerText = 'Logic_Connected';
-                connectBtn.style.borderColor = '#ffffff';
-                connectBtn.style.color = '#ffffff';
-            }, 1000);
-        });
+
+        const connectWallet = async () => {
+            try {
+                const { solana } = window;
+
+                if (solana && solana.isPhantom) {
+                    const response = await solana.connect();
+                    const walletAddress = response.publicKey.toString();
+                    console.log('Connected with Public Key:', walletAddress);
+                    
+                    // Update button UI
+                    connectBtn.innerText = walletAddress.slice(0, 4) + '...' + walletAddress.slice(-4);
+                    connectBtn.style.borderColor = '#ffffff';
+                    connectBtn.style.color = '#ffffff';
+                } else {
+                    alert('Phantom wallet not found. Please install it from https://phantom.app/');
+                }
+            } catch (error) {
+                console.error("Connection failed", error);
+            }
+        };
+
+        connectBtn.addEventListener('click', connectWallet);
     </script>
 </body>
 </html>
